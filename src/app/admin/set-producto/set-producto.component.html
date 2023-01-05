@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>PRODUCTO</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="abrir()">
+        <ion-icon slot="icon-only" name="menu-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <div>
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Producto</ion-label>
+        <ion-input [(ngModel)]="nombre" type="text" placeholder="Ingrese el nombre"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Precio</ion-label>
+        <ion-input [(ngModel)]="precio" type="number" placeholder="Ingrese el precio"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Descuento</ion-label>
+        <ion-input [(ngModel)]="desc" type="text" placeholder="Ingrese el descuento"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Imagen</ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-grid fixed>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="6">
+          <ion-button (click)="agregar()" expand="block" >
+            Guardar
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

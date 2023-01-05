@@ -1,0 +1,7 @@
+{
+  "name": "miapp05_ps2",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
