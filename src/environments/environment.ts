@@ -3,7 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebaseConfig : {
+    apiKey: "AIzaSyBP_ay43CErBlC7nUwcOeaQhi-IHg4kJ_E",
+    authDomain: "upsgame-prueba.firebaseapp.com",
+    projectId: "upsgame-prueba",
+    storageBucket: "upsgame-prueba.appspot.com",
+    messagingSenderId: "185179109500",
+    appId: "1:185179109500:web:58c42fb7403e2f1b3e71f9",
+    measurementId: "G-Y8HLR5719Q"
+  }
 };
 
 /*
@@ -23,16 +32,9 @@ export const environment = {
 
 // // Your web app's Firebase configuration
 // // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-// const firebaseConfig = {
-//   apiKey: "AIzaSyBP_ay43CErBlC7nUwcOeaQhi-IHg4kJ_E",
-//   authDomain: "upsgame-prueba.firebaseapp.com",
-//   projectId: "upsgame-prueba",
-//   storageBucket: "upsgame-prueba.appspot.com",
-//   messagingSenderId: "185179109500",
-//   appId: "1:185179109500:web:58c42fb7403e2f1b3e71f9",
-//   measurementId: "G-Y8HLR5719Q"
-// };
 
-// // Initialize Firebase
+
+
+// Initialize Firebase
 // const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
