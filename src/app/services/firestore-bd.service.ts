@@ -20,7 +20,7 @@ export class FirestoreBdService {
 
   deleteDoc(path:string, id:string){
     const collection = this.store.collection(path);
-    return collection.doc(id).delete;
+    return collection.doc(id).delete();
   }
 
   getCollection<tipo>(path:string){

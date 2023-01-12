@@ -7,14 +7,16 @@
       </ion-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button (click)="nuevo_reg()">
-        <div *ngIf="!nuevo">
+      <div *ngIf="!nuevo">
+        <ion-button (click)="nuevo_reg()">
           <ion-icon slot="icon-only" name="add-outline"></ion-icon>
-        </div>
-        <div *ngIf="nuevo">
+        </ion-button>
+      </div>
+      <div *ngIf="nuevo">
+        <ion-button (click)="nuevo=false">
           <ion-icon slot="icon-only" name="close-outline"></ion-icon>
-        </div>
-      </ion-button>
+        </ion-button>
+      </div>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -37,14 +39,35 @@
       </ion-item>
       <ion-item>
         <ion-label position="floating">Imagen</ion-label>
+        
+        <ion-buttons slot="end">
+          <ion-button>
+            <label for = "file-upload">
+              <ion-icon slot="icon-only" name="image-outline"></ion-icon>
+            </label>
+            <input (change)="uploadImage($event)" id="file-upload" style="display: none;" type="file" accept="image/*">
+          </ion-button>
+        </ion-buttons>
+
+      </ion-item>
+      <ion-item>
+        <!-- <ion-img [src]="image"></ion-img> -->
+        <img [src]="image">
       </ion-item>
     </ion-list>
     <ion-grid fixed>
       <ion-row class="ion-justify-content-center">
         <ion-col size="6">
-          <ion-button (click)="agregar()" expand="block" >
-            <ion-icon slot="icon-only" name="save-outline"></ion-icon>
-          </ion-button>
+          <div *ngIf="nuevo_button">
+            <ion-button (click)="agregar()" expand="block" >
+              <ion-icon slot="icon-only" name="save-outline"></ion-icon>
+            </ion-button>
+          </div>
+          <div *ngIf="!nuevo_button">
+            <ion-button (click)="modificar()" expand="block" >
+              <ion-icon slot="icon-only" name="cloud-upload-outline"></ion-icon>
+            </ion-button>
+          </div>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -54,11 +77,11 @@
       <ion-item *ngFor="let producto of productosObtenidos">
         <ion-label> {{producto.nombre}} </ion-label>
         <ion-label> {{producto.stock}} </ion-label>
-        <ion-button (click)="modificar()" slot="end">
+        <ion-button (click)="nuevo_producto=producto; nuevo=true; nuevo_button=false" slot="end" fill="clear" color="warning">
           <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
         </ion-button>
-        <ion-button (click)="eliminar()" slot="end">
-          <ion-icon slot="icon-only" name="save-outline"></ion-icon>
+        <ion-button (click)="eliminarProducto(producto)" slot="end" fill="clear">
+          <ion-icon slot="icon-only" name="trash-bin-outline" color="danger"></ion-icon>
         </ion-button>
       </ion-item>
     </ion-list>
