@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Resumen</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="abrir()">
+        <ion-icon slot="icon-only" name="menu-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h2 align="center">Resumen de la compra</h2>
+
+  <ion-grid fixed *ngIf="productos.length != 0;else vacio">
+
+    <ion-row>
+      <ion-col size="6" class="ion-align-items-start total"> Total de la Compra </ion-col>
+      <ion-col size="6" class="ion-justify-content-end ion-align-items-center"> {{ total | currency }} </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="4">Producto</ion-col>
+      <ion-col size="4">Cantidad</ion-col>
+      <ion-col size="4">Precio</ion-col>
+    </ion-row>
+    <ion-row *ngFor="let producto of productos">
+      <ion-col size="4">
+        <img [src]="producto.producto.image" [alt]="producto.producto.nombre" style="width: 80px; height: 80px;">
+      </ion-col>
+      <ion-col size="4">
+        <ion-input type="number" [value]="producto.cantidad"></ion-input>
+      </ion-col>
+      <ion-col size="4">
+        {{ producto.cantidad*producto.producto.precio | currency }}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- <div *ngIf="productos.length != 0;else vacio">
+    <ion-list>
+      <ion-item *ngFor="let producto of productos">
+        <ion-label> {{producto.nombre}} </ion-label>
+        <ion-label> {{producto.stock}} </ion-label>
+        <ion-img [src]="producto.image" [alt]="producto.nombre" style="width: 50px; height: 50px;"></ion-img>
+        <ion-button (click)="nuevo_producto=producto; nuevo=true; nuevo_button=false;image=''" slot="end" fill="clear" color="warning">
+          <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
+        </ion-button>
+        <ion-button (click)="eliminarProducto(producto)" slot="end" fill="clear">
+          <ion-icon slot="icon-only" name="trash-bin-outline" color="danger"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-list>
+  </div> -->
+
+  <ng-template #vacio>
+    No se han seleccionado productos para realizar la compra
+  </ng-template>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button (click)="comprar()" expand="block" fill="clear" shape="round">
+      Comprar
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>
