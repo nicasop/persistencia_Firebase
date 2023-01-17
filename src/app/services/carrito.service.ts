@@ -52,4 +52,9 @@ export class CarritoService {
     return pos;
   }
 
+  clearArray(){
+    this.productos = []
+    this.nativeStorage.setItem("carrito",this.productos);
+  }
+
 }
