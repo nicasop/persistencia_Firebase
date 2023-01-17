@@ -13,7 +13,8 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
 import { AngularFireStorageModule } from "@angular/fire/compat/storage";
-import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,7 +26,8 @@ import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
     AdminModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    AngularFireAuthModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy}, NativeStorage],
   bootstrap: [AppComponent],

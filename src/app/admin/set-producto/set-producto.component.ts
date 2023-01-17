@@ -30,8 +30,9 @@ export class SetProductoComponent implements OnInit {
                 private loading: LoadingController,
                 private toast: ToastController,
                 private alert: AlertController,
-                private storage: FirestorageService ) { }
-
+                private storage: FirestorageService 
+              ) { }
+              
   ngOnInit() {
     this.obtenerProductos()
   }
@@ -132,17 +133,6 @@ export class SetProductoComponent implements OnInit {
     await alert.present();
   }
 
-  // async uploadImage( event:any ){
-  //   if (event.target.files && event.target.files[0]){
-  //     const reader = new FileReader();
-  //     reader.onload = ((image) => {
-  //       this.image = image.target?.result as string;
-  //       // console.log(this.image); //imagen en base64
-  //     })
-  //     reader.readAsDataURL(event.target.files[0]);
-  //   }
-  // }
-
   async uploadImage( event:any ){
     const path = "Productos";
     const name = this.nuevo_producto.nombre
@@ -152,10 +142,5 @@ export class SetProductoComponent implements OnInit {
     this.image = res
     console.log(res);
   }
-
-  // uploadImage(event:any){
-  //   const file = event.target.files[0]
-  //   console.log(file);
-  // }
 
 }
