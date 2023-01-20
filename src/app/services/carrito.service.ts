@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 import { Carrito } from '../models/carrito.models';
 import { Producto } from '../models/producto.models';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 @Injectable({
   providedIn: 'root'
@@ -52,8 +52,14 @@ export class CarritoService {
     return pos;
   }
 
-  clearArray(){
-    this.productos = []
+  elimnarProducto(producto:Carrito){
+    var indice = this.productos.indexOf(producto);
+    this.productos.splice(indice, 1);
+    this.nativeStorage.setItem("carrito",this.productos);
+  }
+
+  cleanCarrito(){
+    this.productos = [];
     this.nativeStorage.setItem("carrito",this.productos);
   }
 
