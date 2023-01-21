@@ -32,8 +32,12 @@ export class InicioComponent implements OnInit {
     this.nav.navigateForward('carrito')
   }
 
+  perfil(){
+    this.nav.navigateForward('perfil')
+  }
+
   obtenerProductos(){
-    this.stg.getCollection<Producto>(this.path).subscribe( res => {
+    this.stg.getCollection<Producto>(this.path).subscribe( (res: Producto[]) => {
       this.productos = res;
     })
   }

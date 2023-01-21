@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>PERFIL</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div>
+    <div class="alert alert-primary subtitulo" role="alert">
+      <ion-label>Registro de Productos</ion-label>
+    </div>
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Nombre:</ion-label>
+        <ion-input [(ngModel)]="user.nombre" type="text" placeholder="Ingrese su nombre"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Email:</ion-label>
+        <ion-input [(ngModel)]="user.email" type="text" placeholder="Ingrese su email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Contraseña:</ion-label>
+        <ion-input [(ngModel)]="user.pwd" type="text" placeholder="Ingrese su contraseña"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-button type="button" class="btn btn-primary btn-lg" (click)="registrar()">
+          Registrar
+        </ion-button>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
+
+<!-- "Zkg1qRmIMIgubxWvEZSP5aEp3HF3" -->

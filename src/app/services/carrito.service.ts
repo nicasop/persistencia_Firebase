@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { Carrito } from '../models/carrito.models';
 import { Producto } from '../models/producto.models';
-import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 @Injectable({
   providedIn: 'root'

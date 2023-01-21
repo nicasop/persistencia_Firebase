@@ -4,9 +4,10 @@ import { InicioComponent } from './inicio/inicio.component';
 import { IonicModule } from '@ionic/angular';
 import { ComprasComponent } from './compras/compras.component';
 import { FormsModule } from '@angular/forms';
+import { PerfilComponent } from './perfil/perfil.component';
 
 @NgModule({
-  declarations: [InicioComponent, ComprasComponent],
+  declarations: [InicioComponent, ComprasComponent, PerfilComponent],
   imports: [
     CommonModule,
     IonicModule.forRoot(),

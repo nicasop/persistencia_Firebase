@@ -20,4 +20,18 @@ export class FireauthService {
     return this.auth.createUserWithEmailAndPassword(email,pwd);
   }
 
+  async getUID(){
+    const user = await this.auth.currentUser;
+    if (user === null){
+      return null;
+    }
+    else {
+      return user.uid
+    }
+  }
+
+  stateAuth(){
+    return this.auth.authState;
+  }
+
 }

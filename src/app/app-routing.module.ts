@@ -3,17 +3,12 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { SetProductoComponent } from './admin/set-producto/set-producto.component';
 import { InicioComponent } from './pages/inicio/inicio.component';
 import { ComprasComponent } from './pages/compras/compras.component';
+import { PerfilComponent } from './pages/perfil/perfil.component';
 
 const routes: Routes = [
   {
     path:'inicio',
-    component: InicioComponent,
-    children:[
-      {
-        path: 'carrito',
-        component: ComprasComponent
-      },
-    ]
+    component: InicioComponent
   },
   {
     path:'set-producto',
@@ -22,6 +17,10 @@ const routes: Routes = [
   {
     path:'carrito',
     component: ComprasComponent
+  },
+  {
+    path:'perfil',
+    component: PerfilComponent
   },
   {
       path: '',
