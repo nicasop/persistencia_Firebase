@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Usuarios } from 'src/app/models/usuario.models';
 import { FireauthService } from '../../services/fireauth.service';
 import { FirestoreBdService } from '../../services/firestore-bd.service';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-perfil',
@@ -13,10 +15,14 @@ export class PerfilComponent implements OnInit {
   user: Usuarios = {
     nombre: '',
     email: '',
-    pwd: ''
+    pwd: '',
+    rol: 1
   }
 
-  constructor( public autentication:  FireauthService, private store: FirestoreBdService) { 
+  constructor( public autentication:  FireauthService, 
+               private store: FirestoreBdService,
+               private native: NativeStorage,
+               private nav: NavController) { 
     this.autentication.stateAuth().subscribe({
       next: res => {
         if (res != null){
@@ -35,8 +41,9 @@ export class PerfilComponent implements OnInit {
   }
 
   async registrar(){
-    const res = await this.autentication.registrar(this.user.email, this.user.pwd);
-    console.log(res);
+    const res = await this.autentication.registrar(this.user);
+    this.native.setItem('user',res)
+    this.nav.navigateForward('inicio')
   }
 
   salir(){

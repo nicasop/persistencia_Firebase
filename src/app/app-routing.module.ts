@@ -4,6 +4,7 @@ import { SetProductoComponent } from './admin/set-producto/set-producto.componen
 import { InicioComponent } from './pages/inicio/inicio.component';
 import { ComprasComponent } from './pages/compras/compras.component';
 import { PerfilComponent } from './pages/perfil/perfil.component';
+import { LoginComponent } from './pages/login/login.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path:'perfil',
     component: PerfilComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   },
   {
       path: '',

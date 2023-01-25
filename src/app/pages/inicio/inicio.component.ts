@@ -3,6 +3,8 @@ import { AlertController, MenuController, NavController, ToastController } from 
 import { Producto } from 'src/app/models/producto.models';
 import { FirestoreBdService } from '../../services/firestore-bd.service';
 import { CarritoService } from '../../services/carrito.service';
+import { FireauthService } from '../../services/fireauth.service';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 @Component({
   selector: 'app-inicio',
@@ -17,11 +19,16 @@ export class InicioComponent implements OnInit {
               private alertController: AlertController,
               private toast: ToastController,
               private carrito: CarritoService,
-              private nav: NavController
+              private nav: NavController,
+              private auth: FireauthService,
+              private native: NativeStorage
               ) { }
 
   ngOnInit() {
     this.obtenerProductos();
+    console.log(this.auth.getUID())
+    console.log('-----------------------');
+    console.log(this.auth.getUid())
   }
 
   abrir(){
@@ -30,10 +37,6 @@ export class InicioComponent implements OnInit {
 
   verCompras(){
     this.nav.navigateForward('carrito')
-  }
-
-  perfil(){
-    this.nav.navigateForward('perfil')
   }
 
   obtenerProductos(){

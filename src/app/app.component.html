@@ -14,14 +14,42 @@
         </ion-toolbar>
       </ion-header>
       <ion-content>
-        <ion-menu-toggle autoHide="false">
-          <ion-list>
-            <ion-item routerLink="set-producto">
-              <ion-icon slot="start" name="albums-outline"></ion-icon>
-              <ion-label>Producto</ion-label>
-            </ion-item>
-          </ion-list>
-        </ion-menu-toggle>
+        <ng-container *ngIf="flag == 0; else private">
+          <ion-menu-toggle autoHide="false">
+            <ion-list>
+              <ion-item routerLink="login">
+                <ion-icon slot="start" name="log-in-outline"></ion-icon>
+                <ion-label>Iniciar Sesión</ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-menu-toggle>
+        </ng-container>
+        <ng-template #private >
+          <ng-container *ngIf="flag == 1; else user">
+            <ion-menu-toggle autoHide="false">
+              <ion-list>
+                <ion-item routerLink="set-producto">
+                  <ion-icon slot="start" name="albums-outline"></ion-icon>
+                  <ion-label>Producto</ion-label>
+                </ion-item>
+                <ion-item routerLink="set-producto">
+                  <ion-icon slot="start" name="albums-outline"></ion-icon>
+                  <ion-label>Cerrar Sesión</ion-label>
+                </ion-item>
+              </ion-list>
+            </ion-menu-toggle>
+          </ng-container>
+        </ng-template>
+        <ng-template #user>
+            <ion-menu-toggle autoHide="false">
+              <ion-list>
+                <ion-item routerLink="set-producto">
+                  <ion-icon slot="start" name="albums-outline"></ion-icon>
+                  <ion-label>Cerrar Sesión</ion-label>
+                </ion-item>
+              </ion-list>
+            </ion-menu-toggle>
+        </ng-template>
       </ion-content>
     </ion-menu>
     <ion-router-outlet id="principal"></ion-router-outlet>

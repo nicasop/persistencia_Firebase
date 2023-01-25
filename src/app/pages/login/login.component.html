@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div>
+    <div class="alert alert-primary subtitulo" role="alert">
+        <h1 align="center"> INICIAR SESIÓN </h1>
+    </div>
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Email:</ion-label>
+        <ion-input [(ngModel)]="email" type="text" placeholder="Ingrese su email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Contraseña:</ion-label>
+        <ion-input [(ngModel)]="pwd" type="password" placeholder="Ingrese su contraseña"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-buttons >
+          <ion-button type="button" class="btn btn-primary btn-lg" (click)="login()">
+            Iniciar Sesión
+          </ion-button>
+          <ion-button type="button" class="btn btn-primary btn-lg" (click)="registrar()">
+            Registrar
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

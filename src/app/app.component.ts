@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FireauthService } from './services/fireauth.service';
 
 @Component({
@@ -6,6 +6,27 @@ import { FireauthService } from './services/fireauth.service';
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
-export class AppComponent {
-  constructor( private autentication: FireauthService) {}
+export class AppComponent implements OnInit{
+  uid: string | undefined;
+  flag!: number;
+  constructor( private autentication: FireauthService) {
+  }
+
+  ngOnInit(){
+    this.uid = this.autentication.getUid();
+    console.log(this.uid)
+    if (this.uid != undefined){
+     if (this.uid == "SEa1WCmkI8gUWE5TLErFgvGgG2L2") {
+      this.flag = 1;
+     }
+     else {
+      this.flag = 2;
+     }
+    }
+    else{
+      this.flag = 0;
+    }
+  }
+
+
 }

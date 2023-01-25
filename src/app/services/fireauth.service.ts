@@ -1,12 +1,19 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { FirestoreBdService } from './firestore-bd.service';
+import { Usuarios } from '../models/usuario.models';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FireauthService {
 
-  constructor( public auth: AngularFireAuth ) { }
+  uid: string | undefined;
+
+  constructor( public auth: AngularFireAuth, 
+               private db:FirestoreBdService,
+               private native: NativeStorage ) { }
 
   login(email:string, pwd: string){
     return this.auth.signInWithEmailAndPassword(email,pwd);
@@ -16,8 +23,8 @@ export class FireauthService {
     return this.auth.signOut()
   }
 
-  registrar(email: string, pwd:string){
-    return this.auth.createUserWithEmailAndPassword(email,pwd);
+  registrar(user: Usuarios){
+    return this.auth.createUserWithEmailAndPassword(user.email,user.pwd);
   }
 
   async getUID(){
@@ -32,6 +39,13 @@ export class FireauthService {
 
   stateAuth(){
     return this.auth.authState;
+  }
+
+  setUid(uid:string | undefined){
+    this.uid = uid
+  }
+  getUid(){
+    return this.uid
   }
 
 }
