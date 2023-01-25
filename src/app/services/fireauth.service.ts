@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FirestoreBdService } from './firestore-bd.service';
 import { Usuarios } from '../models/usuario.models';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { NavController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +11,12 @@ import { NativeStorage } from '@ionic-native/native-storage/ngx';
 export class FireauthService {
 
   uid: string | undefined;
+  flag:number = 0;
 
   constructor( public auth: AngularFireAuth, 
                private db:FirestoreBdService,
-               private native: NativeStorage ) { }
+               private native: NativeStorage,
+               private nav: NavController ) {}
 
   login(email:string, pwd: string){
     return this.auth.signInWithEmailAndPassword(email,pwd);
@@ -42,10 +45,33 @@ export class FireauthService {
   }
 
   setUid(uid:string | undefined){
-    this.uid = uid
+    this.uid = uid;
+    this.setFlag();
   }
+
   getUid(){
     return this.uid
   }
 
+  setFlag(){
+    if (this.uid != undefined){
+      if (this.uid == "SEa1WCmkI8gUWE5TLErFgvGgG2L2") {
+       this.flag = 1;
+      }
+      else {
+       this.flag = 2;
+      }
+     }
+     else{
+       this.flag = 0;
+     }
+  }
+
+  cerrarSesion(){
+    this.logout()
+    this.uid = undefined;
+    this.flag = 0;
+    this.nav.navigateForward('login')
+    console.log('servicio');
+  }
 }

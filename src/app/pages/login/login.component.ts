@@ -19,6 +19,11 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {}
 
+  ionViewWillEnter(){
+    this.email = '';
+    this.pwd = '';
+  }
+
   async login(){
     const user = await this.auth.login(this.email,this.pwd)
     console.log(user);

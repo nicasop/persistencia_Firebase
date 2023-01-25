@@ -20,15 +20,11 @@ export class InicioComponent implements OnInit {
               private toast: ToastController,
               private carrito: CarritoService,
               private nav: NavController,
-              private auth: FireauthService,
-              private native: NativeStorage
+              private auth: FireauthService
               ) { }
 
   ngOnInit() {
     this.obtenerProductos();
-    console.log(this.auth.getUID())
-    console.log('-----------------------');
-    console.log(this.auth.getUid())
   }
 
   abrir(){
@@ -36,7 +32,11 @@ export class InicioComponent implements OnInit {
   }
 
   verCompras(){
-    this.nav.navigateForward('carrito')
+    if (this.auth.uid != undefined){
+      this.nav.navigateForward('carrito')
+    }else{
+      this.presentToast("Necesita iniciar sesion para ver sus compras")
+    }
   }
 
   obtenerProductos(){
@@ -46,45 +46,49 @@ export class InicioComponent implements OnInit {
   }
 
   async shopAlert(producto:Producto) {
-    const alert = await this.alertController.create({
-      header: '¿Desea comprar el producto '+ producto.nombre +'?',
-      inputs: [
-        {
-          name:'qty',
-          type: 'number',
-          placeholder: 'Cantidad',
-          min: 1,
-          max: producto.stock,
-          value:1
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel',
-          handler: () => {
-            
+    if (this.auth.uid != undefined){
+      const alert = await this.alertController.create({
+        header: '¿Desea comprar el producto '+ producto.nombre +'?',
+        inputs: [
+          {
+            name:'qty',
+            type: 'number',
+            placeholder: 'Cantidad',
+            min: 1,
+            max: producto.stock,
+            value:1
           },
-        },
-        {
-          text: 'Comprar',
-          role: 'confirm',
-          handler: () => {
-            alert.onWillDismiss().then( res => {
-              const qty = res.data.values.qty;
-              if( qty != 0 && qty <= Number(producto.stock) ){
-                this.carrito.addProducto( producto, qty );
-
-              }else{
-                this.presentToast('La cantidad que desea comprar no esta disponible')
-              }
-            });
+        ],
+        buttons: [
+          {
+            text: 'Cancelar',
+            role: 'cancel',
+            handler: () => {
+              
+            },
           },
-        },
-      ],
-    });
+          {
+            text: 'Comprar',
+            role: 'confirm',
+            handler: () => {
+              alert.onWillDismiss().then( res => {
+                const qty = res.data.values.qty;
+                if( qty != 0 && qty <= Number(producto.stock) ){
+                  this.carrito.addProducto( producto, qty );
 
-    await alert.present();
+                }else{
+                  this.presentToast('La cantidad que desea comprar no esta disponible')
+                }
+              });
+            },
+          },
+        ],
+      });
+
+      await alert.present();
+    }else{
+      this.presentToast("Necesita iniciar sesion para ver sus compras")
+    }
   }
 
   async presentToast(msg:string) {

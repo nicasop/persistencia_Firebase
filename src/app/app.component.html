@@ -1,4 +1,4 @@
-<ion-app>
+<ion-app view-cache="false">
   <ion-split-pane contentId="principal">
     <ion-menu contentId="principal" menuId="principal" side="start" type="overlay">
       <ion-header>
@@ -14,42 +14,46 @@
         </ion-toolbar>
       </ion-header>
       <ion-content>
-        <ng-container *ngIf="flag == 0; else private">
+        <!-- menu invitado -->
+        <ng-container *ngIf="auth.flag == 0; else private">
           <ion-menu-toggle autoHide="false">
             <ion-list>
               <ion-item routerLink="login">
-                <ion-icon slot="start" name="log-in-outline"></ion-icon>
+                <ion-icon slot="start" name="person-outline"></ion-icon>
                 <ion-label>Iniciar Sesión</ion-label>
               </ion-item>
             </ion-list>
           </ion-menu-toggle>
         </ng-container>
+        <!-- menu admin -->
         <ng-template #private >
-          <ng-container *ngIf="flag == 1; else user">
+          <ng-container *ngIf="auth.flag == 1; else user">
             <ion-menu-toggle autoHide="false">
               <ion-list>
                 <ion-item routerLink="set-producto">
                   <ion-icon slot="start" name="albums-outline"></ion-icon>
                   <ion-label>Producto</ion-label>
                 </ion-item>
-                <ion-item routerLink="set-producto">
-                  <ion-icon slot="start" name="albums-outline"></ion-icon>
+                <ion-item (click)="auth.cerrarSesion()">
+                  <ion-icon slot="start" name="log-in-outline"></ion-icon>
                   <ion-label>Cerrar Sesión</ion-label>
                 </ion-item>
               </ion-list>
             </ion-menu-toggle>
           </ng-container>
         </ng-template>
+        <!-- menu logueado -->
         <ng-template #user>
             <ion-menu-toggle autoHide="false">
               <ion-list>
-                <ion-item routerLink="set-producto">
-                  <ion-icon slot="start" name="albums-outline"></ion-icon>
+                <ion-item (click)="auth.cerrarSesion()">
+                  <ion-icon slot="start" name="log-in-outline"></ion-icon>
                   <ion-label>Cerrar Sesión</ion-label>
                 </ion-item>
               </ion-list>
             </ion-menu-toggle>
         </ng-template>
+
       </ion-content>
     </ion-menu>
     <ion-router-outlet id="principal"></ion-router-outlet>
