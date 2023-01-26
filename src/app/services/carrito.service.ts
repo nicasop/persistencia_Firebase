@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { Carrito } from '../models/carrito.models';
 import { Producto } from '../models/producto.models';
+import { FirestoreBdService } from './firestore-bd.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class CarritoService {
 
   productos: Carrito[] = [];
 
-  constructor( private nativeStorage:NativeStorage ) { 
+  constructor( private nativeStorage:NativeStorage, private db:FirestoreBdService ) { 
     this.getProducts();
    }
 
@@ -59,8 +60,24 @@ export class CarritoService {
   }
 
   cleanCarrito(){
+    this.updateProducts();
     this.productos = [];
     this.nativeStorage.setItem("carrito",this.productos);
+  }
+
+  updateProducts(){
+    this.productos.forEach( product => {
+      let pro = product.producto
+      pro.stock = pro.stock - product.cantidad;
+      this.db.updateDoc(pro,'productos/',pro.id);
+    })
+    // let pro;
+    // this.db.getDoc<Producto>('productos/',this.productos[0].producto.id).subscribe({
+    //   next: res => {
+    //     pro = res;
+    //   }
+    // });
+    // console.log(pro);
   }
 
 }

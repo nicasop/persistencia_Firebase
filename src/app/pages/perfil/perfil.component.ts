@@ -52,7 +52,7 @@ export class PerfilComponent implements OnInit {
 
   getInfo(uid: string){
     const path = 'usuarios';
-    this.store.getDocID<Usuarios>(path,uid).subscribe({
+    this.store.getDoc<Usuarios>(path,uid).subscribe({
       next: resp => {
         if (resp){
           this.user = resp

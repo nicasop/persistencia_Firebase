@@ -32,7 +32,7 @@ export class FirestoreBdService {
     return this.store.createId();
   }
 
-  getDocID<tipo>(path:string,id:string){
+  getDoc<tipo>(path:string,id:string){
     const doc = this.store.collection<tipo>(path).doc(id);
     return doc.valueChanges();
   }
